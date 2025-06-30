@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>thought dump</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>🍒 what kind of thoughts do you need to dump?</h1>
+    
+    <div class="checkbox-group">
+      <label><input type="radio" name="mainCategory" value="work" onclick="showSub('work')"> 🖇️ work stuff</label>
+      <label><input type="radio" name="mainCategory" value="personal" onclick="showSub('personal')"> 💌 personal life</label>
+      <label><input type="radio" name="mainCategory" value="creative" onclick="showSub('creative')"> 🎨 creative ideas</label>
+      <label><input type="radio" name="mainCategory" value="random" onclick="showSub('random')"> 💭 random ramblings</label>
+    </div>
+
+    <div id="sub-work" class="subgroup hidden">
+      <p>🖇️ is your thought about:</p>
+      <label><input type="checkbox"> team</label>
+      <label><input type="checkbox"> program or project ideas</label>
+      <label><input type="checkbox"> a process</label>
+      <label><input type="checkbox"> feedback or reflection</label>
+      <label><input type="checkbox"> something else</label>
+    </div>
+
+    <div id="sub-personal" class="subgroup hidden">
+      <p>💌 is it related to:</p>
+      <label><input type="checkbox"> life admin</label>
+      <label><input type="checkbox"> routines or habits</label>
+      <label><input type="checkbox"> something emotional</label>
+      <label><input type="checkbox"> just venting</label>
+    </div>
+
+    <div id="sub-creative" class="subgroup hidden">
+      <p>🎨 what kind of idea is it?</p>
+      <label><input type="checkbox"> content or writing</label>
+      <label><input type="checkbox"> design</label>
+      <label><input type="checkbox"> just a spark of something</label>
+    </div>
+  </div>
+
+  <canvas id="emojiCanvas"></canvas>
+  <script src="script.js"></script>
+</body>
+</html>
