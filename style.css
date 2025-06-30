@@ -1,68 +1,74 @@
 body {
-  font-family: 'Arial', sans-serif;
-  background: #fffafc;
   margin: 0;
-  padding: 2rem;
-  position: relative;
-  overflow-x: hidden;
-}
-
-.container {
-  max-width: 600px;
-  margin: auto;
+  font-family: 'Segoe UI', sans-serif;
   background: white;
-  border-radius: 1rem;
-  box-shadow: 0 0 20px rgba(255, 192, 203, 0.2);
-  padding: 2rem;
+  overflow: hidden;
   position: relative;
-  z-index: 10;
 }
 
-h1 {
-  font-size: 1.7rem;
+canvas#backgroundCanvas {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.form-container {
+  position: relative;
+  z-index: 1;
+  max-width: 600px;
+  margin: 4rem auto;
+  padding: 2rem;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 0 12px rgba(0,0,0,0.1);
+}
+
+label.main-label {
+  font-size: 1.2rem;
+  display: block;
   margin-bottom: 1rem;
-  color: #333;
-  letter-spacing: -0.3px;
 }
 
-.checkbox-group,
-.subgroup {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-  margin-bottom: 1.5rem;
-}
-
-.checkbox-group label,
-.subgroup label {
-  background-color: #fce4ec;
-  padding: 0.5rem 0.75rem;
-  border-radius: 20px;
-  font-size: 0.9rem;
+.category-options button,
+.subcategory-options button {
+  display: inline-block;
+  margin: 0.3rem;
+  padding: 0.5rem 1rem;
+  background: #f7f7ff;
+  border: 2px solid lavender;
+  border-radius: 8px;
   cursor: pointer;
-  transition: background-color 0.2s ease;
+  transition: background 0.2s ease;
 }
 
-.checkbox-group label:hover,
-.subgroup label:hover {
-  background-color: #f8bbd0;
+.category-options button:hover,
+.subcategory-options button:hover {
+  background: lavenderblush;
 }
 
-.subgroup p {
-  width: 100%;
-  font-weight: bold;
+.text-area-container {
+  margin-top: 1.5rem;
+}
+
+.text-label {
+  display: block;
   margin-bottom: 0.5rem;
+  font-size: 1rem;
+}
+
+textarea {
+  width: 100%;
+  border: 2px solid lavender;
+  border-radius: 8px;
+  padding: 0.75rem;
+  font-size: 1rem;
+  resize: vertical;
+  background: #fdfdfd;
 }
 
 .hidden {
   display: none;
-}
-
-/* Falling emoji canvas */
-#emojiCanvas {
-  position: fixed;
-  top: 0;
-  left: 0;
-  pointer-events: none;
-  z-index: 1;
 }
