@@ -1,66 +1,66 @@
-document.addEventListener("DOMContentLoaded", () => {
-  const checkboxes = document.querySelectorAll('input[name="category"]');
-  const subgroups = document.querySelectorAll(".subgroup");
+const categories = {
+  work: ['⬜ team', '⬜ program or project ideas', '⬜ a process', '⬜ feedback or reflection', '⬜ something else'],
+  personal: ['⬜ life admin', '⬜ routines or habits', '⬜ something emotional', '⬜ just venting'],
+  creative: ['⬜ content or writing', '⬜ design', '⬜ just a spark of something'],
+  random: ['⬜ no subcategory needed']
+};
 
-  checkboxes.forEach(cb => {
-    cb.addEventListener("change", () => {
-      // Hide all subgroups first
-      subgroups.forEach(sg => sg.classList.add("hidden"));
+const subcategoryContainer = document.getElementById('subcategoryContainer');
+const textAreaContainer = document.querySelector('.text-area-container');
 
-      // Show relevant subgroup based on selection
-      if (cb.checked) {
-        document.querySelectorAll(`.subgroup[data-group="${cb.value}"]`).forEach(sg =>
-          sg.classList.remove("hidden")
-        );
-      }
-    });
-  });
+document.querySelectorAll('[data-category]').forEach(button => {
+  button.addEventListener('click', () => {
+    const selected = button.dataset.category;
+    subcategoryContainer.innerHTML = categories[selected].map(sub =>
+      `<button type="button" class="subcategory">${sub}</button>`
+    ).join('');
+    subcategoryContainer.classList.remove('hidden');
+    textAreaContainer.classList.add('hidden');
 
-  // Falling emoji animation
-  const canvas = document.getElementById("emojiCanvas");
-  const ctx = canvas.getContext("2d");
-  const emojis = ["🍒", "💌", "✨", "🧁", "🦋", "❤️", "🌿"];
-  let particles = [];
-
-  function resizeCanvas() {
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-  }
-
-  function createParticles() {
-    for (let i = 0; i < 20; i++) {
-      particles.push({
-        emoji: emojis[Math.floor(Math.random() * emojis.length)],
-        x: Math.random() * canvas.width,
-        y: Math.random() * canvas.height,
-        speed: 1 + Math.random() * 2,
-        size: 24 + Math.random() * 12
+    document.querySelectorAll('.subcategory').forEach(btn => {
+      btn.addEventListener('click', () => {
+        textAreaContainer.classList.remove('hidden');
       });
-    }
-  }
-
-  function draw() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    ctx.font = "24px serif";
-
-    particles.forEach(p => {
-      ctx.font = `${p.size}px serif`;
-      ctx.fillText(p.emoji, p.x, p.y);
-      p.y += p.speed;
-
-      if (p.y > canvas.height) {
-        p.y = -20;
-        p.x = Math.random() * canvas.width;
-      }
     });
-
-    requestAnimationFrame(draw);
-  }
-
-  resizeCanvas();
-  createParticles();
-  draw();
-  window.addEventListener("resize", () => {
-    resizeCanvas();
   });
 });
+
+// Falling emojis animation
+const canvas = document.getElementById('backgroundCanvas');
+const ctx = canvas.getContext('2d');
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+const emojis = ['🦋','✨','❤️','🧁','🍒'];
+const particles = [];
+
+function EmojiParticle() {
+  this.x = Math.random() * canvas.width;
+  this.y = Math.random() * canvas.height;
+  this.size = 24 + Math.random() * 8;
+  this.emoji = emojis[Math.floor(Math.random() * emojis.length)];
+  this.speed = 0.3 + Math.random() * 0.7;
+}
+
+function initParticles() {
+  for (let i = 0; i < 40; i++) {
+    particles.push(new EmojiParticle());
+  }
+}
+
+function animate() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  particles.forEach(p => {
+    ctx.font = `${p.size}px serif`;
+    ctx.fillText(p.emoji, p.x, p.y);
+    p.y += p.speed;
+    if (p.y > canvas.height) {
+      p.y = -50;
+      p.x = Math.random() * canvas.width;
+    }
+  });
+  requestAnimationFrame(animate);
+}
+
+initParticles();
+animate();
